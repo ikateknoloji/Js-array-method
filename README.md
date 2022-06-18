@@ -1,6 +1,6 @@
-# **Array.find() Methodu**
+# **Array.map() Methodu**
 
-***find() yöntemi, sağlanan dizideki sağlanan test işlevini karşılayan ilk öğeyi döndürür. Test işlevini karşılayan hiçbir değer yoksa, tanımsız döndürülür***
+***map() yöntemi, Yürütülen işlev  üst dizide bulunan her öğe için çalıştırılacak şekilde yürütülür. Bunun sonucunda bize yeni bir dize değeri döndürür.Dize üzerinde hiçbir mutasyon oluşturmaz. Genellikle map() yöntemi, bir dizi üzerinde yineleme yapmak ve dizinin her öğesinde işlevi çağırmak için kullanılır***
 
 #### Syntax
 
@@ -26,176 +26,180 @@ find(function(element, index, array) { /* ... */ }, thisArg)
   2. *Mevcut elemanın indeksini tutan isteğe bağlı bir parametredir.*
   3. *Geçerli öğenin ait olduğu dizi nesnesini tutan isteğe bağlı bir parametredir*
 
-```Javascript
-let data =[
- ......
-]
-const founded = data.find(item => item._id === "5e652aa69cb94a55a21dbd24")
+*map, bir dizideki her öğe için sağlanan bir callbackFn işlevini sırayla çağırır ve sonuçlardan yeni bir dizi oluşturur. callbackFn, yalnızca atanmış değerlere sahip (tanımsızlar dahil) dizinin dizinleri için çağrılır*
 
-console.log(founded)
+
+``` Javascript
+let data =[
+ .
+ ..
+ ...
+]
+let dataMaping = data.map( item =>{
+ return{
+  name   : item.name,
+  age    : item.age,
+  email  : item.email,
+  gender : item.gender
+ }
+})
+
+console.log(dataMaping)
 
 /*
-about: "Eiusmod do qui veniam cupidatat velit est sit tempor nostrud nostrud tempor magna. Et officia velit excepteur dolor adipisicing adipisicing cupidatat voluptate et exercitation. Sint magna sit nisi laborum sunt dolore velit irure in proident. Veniam dolore amet amet dolor ullamco cupidatat Lorem.\r\n"
-address: "646 Montague Street, Cutter, Hawaii, 1870"
-age: 30
-balance: "$3,929.51"
-company: "EARTHPLEX"
-email: "caroledaniels@earthplex.com"
-eyeColor: "brown"
-friends: (3) [{…}, {…}, {…}]
-gender: "female"
-guid: "7fbd5a0a-5d8b-4cdd-97b7-f7715183ea60"
-index: 1
-isActive: true
-latitude: 59.036927
-longitude: 91.043976
-name: "Carole Daniels"
-phone: "+1 (863) 523-3588"
-picture: "http://placehold.it/32x32"
-registered: "2016-10-22T04:13:14 -03:00"
-tags: (7) ['consectetur', 'ut', 'laboris', 'officia', 'velit', 'in', 'in']
-_id: "5e652aa69cb94a55a21dbd24"
+(29) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+0:
+age: 37
+email: "patehenry@medcom.com"
+gender: "male"
+name: "Pate Henry"
+[[Prototype]]: Object
+.
+..
+...
+*/
+```
+Map foksiyonu dize üzerinde değişik yapmadığı gibi işlev ile yürütülen dize öğelerinde yapılan değişikliklerle beraber bizim için yeni bir dize oluşturur.
+
+``` Javascript
+let filtred = data.filter( item => item.age > 30 && item.gender === "female")
+
+let dataMaping = filtred.map( item =>{
+ return{
+  name   : item.name,
+  age    : item.age,
+  email  : item.email,
+  gender : item.gender
+ }
+})
+
+console.log(dataMaping)
+/*
+(5) [{…}, {…}, {…}, {…}, {…}]
+0: {name: 'Sharron Hendricks', age: 32, email: 'sharronhendricks@endipin.com', gender: 'female'}
+1: {name: 'Hillary Cote', age: 36, email: 'hillarycote@daisu.com', gender: 'female'}
+2: {name: 'Maribel Bartlett', age: 40, email: 'maribelbartlett@pyramax.com', gender: 'female'}
+3: {name: 'Dina Winters', age: 36, email: 'dinawinters@circum.com', gender: 'female'}
+4: {name: 'Sonya Barron', age: 35, email: 'sonyabarron@exoblue.com', gender: 'female'}
+length: 5
+[[Prototype]]: Array(0)
 */
 ```
 
-Find sonuç olarak bir koşul döndürmelidir yani bir test işlemi sağlamalı.Böylece bizim için koşulu sağladığı ilk değeri alabiliriz.Aslında biz bu fonksiyonu kullanırken uniq değerler ararız yani sonuç olarak birden fazla değer döndürmediğinden bizim için önemli olan benzersiz bir değeri yakalamaktır. Yukardaki örnekte gördüğünüz üzere biz sadece benzersiz id değerlerinden oluşan array elemanlarından belirtiğimiz id değerine sahip array elemanına ulaştık.
+Zincirleme olarak bu örneği yapabiliriz.
+```Javascript 
+let dataMaping = data.filter( item => item.age > 30 && item.gender === "female").map( item =>{
+ return{
+  name   : item.name,
+  age    : item.age,
+  email  : item.email,
+  gender : item.gender
+ }
+})
 
+console.log(dataMaping)
+/*
+(5) [{…}, {…}, {…}, {…}, {…}]
+*/
 ```
-....(item => item._id === "5e652aa69cb94a55a21dbd24")
-```
+Bizim için yine aynı sonucu üretecektir javascripte metodları zincirleme olarak kullanabilirsiniz.
 
-# **Array.findIndex() Methodu**
+# **Array.forEach() Methodu**
 
-**findIndex() yöntemi, sağlanan test işlevini karşılayan dizideki ilk öğenin dizinini döndürür. Aksi takdirde, hiçbir öğenin testi geçmediğini belirten -1 döndürür.**
-
-### Syntax
-```Javascript
-findIndex((element) => { /* ... */ } )
-findIndex((element, index) => { /* ... */ } )
-findIndex((element, index, array) => { /* ... */ } )
-
-// Callback function
-findIndex(callbackFn)
-findIndex(callbackFn, thisArg)
-
-// Inline callback function
-findIndex(function(element) { /* ... */ })
-findIndex(function(element, index) { /* ... */ })
-findIndex(function(element, index, array){ /* ... */ })
-findIndex(function(element, index, array) { /* ... */ }, thisArg)
-```
-* **callbackFn: Sağlanan test işlevi true değeri döndürene kadar belirtilen dize üzereindeki her eleman için bu test işlevini döndürür.**
-
-  1. *element: Bu parametre, geçerli öğeyi tutar.Bu dize üzerindeki her elemanı temsil eder.*
-  2. *index: Dize içerisindeki mevcut elemanların index'ini tutan isteğe bağlı bir parametredir.*
-  3. *array: Geçerli öğenin ait olduğu dizi nesnesini tutan isteğe bağlı bir parametredir.*
-
-* **thisArg : Bu parametre isteğe bağlıdır, eğer fonksiyona geçirilecek bir değer “this” değeri olarak kullanılacaksa, "undefined" değeri “this” değeri olarak geçecektir.**
-
-***Dönüş değeri: Dizideki öğelerden herhangi biri testi geçerse öğenin index'ini döndürür, aksi takdirde -1 döndürür***
-
-``` Javascript
-let data =[
- .....
- ...
-]
-const founded = data.findIndex(item => item._id === "5e652aa69cb94a55a21dbd24")
-
-console.log(founded)
-```
-#### Example 
-
-```Javascript
-const ages = [23,49,32,20];
-
-function checkAge(age){
- return age > 24;
-}
-ages.findIndex(checkAge)
-// 1
-```
-
-#### Example
-```Javascript
-const ages = [23,49,32,20];
-
-function checkAge(age){
- return age < 12;
-}
-ages.findIndex(checkAge)
-// -1
-```
-# **Array.indexOf() Methodu**
-
-***indexOf() yöntemi, belirli bir öğenin dizide bulunabileceği ilk dizini veya mevcut değilse -1  döndürür.***
+*forEach() yöntemi, her dizi öğesi için sağlanan işlevi bir kez yürütür. Ancak map methodundan farklı olarak bir sonuç dizesi döndürmez.forEach yapılan işlemler bir döngü bir for gibi davranır aslında for ile yapılan işlemleri daha kolay hale getirmeyi amaçlamıştır.*
 
 #### Syntax
-
 ```Javascript
-indexOf(searchElement)
-indexOf(searchElement, fromIndex)
-```
-
-#### Example
-```Javascript
-const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
-
-console.log(beasts.indexOf('bison'));
-// expected output: 1
-
-// start from index 2
-console.log(beasts.indexOf('bison', 2));
-// expected output: 4
-
-console.log(beasts.indexOf('giraffe'));
-// expected output: -1
-
-```
-# **Array.filter() Methodu**
-
-***filter yöntemi , yürütülen işlev doğrultusunda testi geçen her öğeden oluşan bir dize oluşturur.find metodundan farklı olarak testi geçen her öğeyi bir dizeye***
-
-#### Syntax
-``` Javascript
-filter((element) => { /* ... */ } )
-filter((element, index) => { /* ... */ } )
-filter((element, index, array) => { /* ... */ } )
+// Arrow function
+forEach((element) => { /* ... */ })
+forEach((element, index) => { /* ... */ })
+forEach((element, index, array) => { /* ... */ })
 
 // Callback function
-filter(callbackFn)
-filter(callbackFn, thisArg)
+forEach(callbackFn)
+forEach(callbackFn, thisArg)
 
 // Inline callback function
-filter(function(element) { /* ... */ })
-filter(function(element, index) { /* ... */ })
-filter(function(element, index, array){ /* ... */ })
-filter(function(element, index, array) { /* ... */ }, thisArg)
+forEach(function(element) { /* ... */ })
+forEach(function(element, index) { /* ... */ })
+forEach(function(element, index, array){ /* ... */ })
+forEach(function(element, index, array) { /* ... */ }, thisArg)
 ```
-* **callbackFn** : *Her öğe için bir test işlevi sağlar.Öğeyi tutmak için true veya aksi takdirde false olarak zorlayan bir değer döndürür. İşlev, aşağıdaki argümanlarla çağrılır:*
- 1. **element**: *Dizinin işlenmekte olan öğelerine karşılık gelir.*
- 2. **index :** *Dizi öğelerinin index'ini veri bu parametre isteğe bağlıdır.*
- 3. **array :** *Testi geçen öğeleri içeren yeni bir dizidir. Hiçbir öğe testi geçmezse, boş bir dizi döndürülür.*
 
- #### Example
+* **CallbackFn: Dizenin her değeri için yürütülecek işlevdir.Bu işlev aşağıdaki argümanlara sahiptir.**
+  1. *Element: Dizede bulunan geçerli öğedir. CallbackFn yürütüldüğünde bu değerler üzerinde işlemler yapar.*
+  2. *Mevcut elemanın indeksini tutan isteğe bağlı bir parametredir.*
+  3. *Geçerli öğenin ait olduğu dizi nesnesini tutan isteğe bağlı bir parametredir*
 
- ```javascript
- let data = [
-  .
-  ..
-  ...
- ]
- let filteredItems = data.filter( item => item.age > 30)
 
- console.log(filteredItems)
- ```
+```Javascript
+const items = ['item1', 'item2', 'item3'];
 
- #### Example
- ```javascript
- let filteredItems = data.filter( item => item.age > 30)
+const copyItems = [];
 
- console.log(filteredItems)
+for (let i = 0; i < items.length; i++) {
+  copyItems.push(items[i]);
+}
+```
+Biz döngüler oluşturarak array itemlerini başka dizeye aktarabiliriz.Ancak forEach bizim için bu işlemleri daha basite indirgeyecektir.
 
- filteredItems = data.filter(item => item.age > 30 &&  item.gender === "female")
- 
- console.log(filteredItems)
- ```
+```Javascript
+const items = ['item1', 'item2', 'item3'];
+const copyItems = [];
+
+
+items.forEach((item) => {
+  copyItems.push(item);
+});
+```
+
+
+### Example
+```Javascript
+let newArr = []
+
+const filtered = 
+data
+.filter( item => item.age > 30 && item.gender === "female")
+.forEach(async(item )=>{
+  await newArr.push({
+   name:item.name,
+   age:item.age
+  })
+})
+
+console.log(newArr)
+```
+
+Gördüğünüz gibi newArr dizesini mutasyona uğrattı işte map ile aralarındaki en büyük farklardan birisidir.
+
+# **Array.Reduce() Methodu**
+
+
+**Reduce() yöntemi, dizinin her bir öğesinde bir redüktör işlevi yürütür ve tek bir çıktı değeri döndürür.**
+
+#### Syntax
+```
+arr.reduce(callback(accumulator, currentValue), initialValue)
+```
+* **callback:** Bir redüktör işlevidir.
+  * **accumulator:** Önceki cağrıdan kaynaklanan değerdir. ilk aramada initialValue değerine bakar yoksa eğer birr array[1] değerini alır.
+  * **currentValue:** Geçerli öğenin değerleridir.
+  * **currentIndex:** Dizedeki dizinlerinlerin konumudur.
+  * **array:** Sağlanan dize değerlerini içerir.
+
+* **initialValue** isteğe bağlıdır.Geri arama başlatıldığında accumulator başlatılma değerine bakar ardından redüktör işlevi doğrultusunda değerleri bir yapı içerisinde depolar.
+
+```Javascript
+const array1 = [1, 2, 3, 4];
+
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0;
+const sumWithInitial = array1.reduce(
+  (previousValue, currentValue) => previousValue + currentValue,
+  initialValue
+);
+console.log(sumWithInitial);
+// expected output: 10
+
+```

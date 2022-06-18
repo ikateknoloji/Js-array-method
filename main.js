@@ -1117,51 +1117,42 @@ let data = [
   }
 ];
 
+let dataMaping = data.filter( item => item.age > 30 && item.gender === "female").map( item =>{
+ return{
+  name   : item.name,
+  age    : item.age,
+  email  : item.email,
+  gender : item.gender
+ }
+})
+console.log(dataMaping)
 
-/*
-// find method Example
-const founded = data.find(item => item._id === "5e652aa69cb94a55a21dbd24")
-console.log(founded)
-*/
 
 
-/*
-// findIndex method Example
-const foundedItemIndex = data.findIndex(item => item._id === "5e652aa69cb94a55a21dbd24")
+let newArr = []
 
-console.log(foundedItemIndex)
-*/
 
-/*
-let ages = [23,49,32,20];
+data
+.filter( item => item.age > 30 && item.gender === "female")
+.forEach(async(item )=>{
+  await newArr.push({
+   name:item.name,
+   age:item.age
+  })
+})
 
-function checkAge(age){
- return age > 24;
-}
-ages.findIndex(checkAge)
-// 1
+console.log(newArr)
 
-*/
 
-/*
-// indexOf method Example
+const totalAge = data.reduce((total,item)=>{
+ return total + item.age
+},0)
 
-const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+console.log(totalAge)
 
-console.log(beasts.indexOf('bison'));
-// expected output: 1
+total = 0
+data.forEach( item => total += item.age )
 
-// start from index 2
-console.log(beasts.indexOf('bison', 2));
-// expected output: 4
+console.log(total)
 
-console.log(beasts.indexOf('giraffe'));
-// expected output: -1
-*/
 
-let filteredItems = data.filter( item => item.age > 30)
-
-console.log(filteredItems)
-
-filteredItems = data.filter(item => item.age > 30 &&  item.gender === "female")
-console.log(filteredItems)
