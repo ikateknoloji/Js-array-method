@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(239, 227, 212);
+  color: #333;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+li.line_through {
+  text-decoration: line-through;
+  color: green;
+}
