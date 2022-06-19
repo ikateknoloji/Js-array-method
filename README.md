@@ -203,3 +203,27 @@ console.log(sumWithInitial);
 // expected output: 10
 
 ```
+
+#### Example
+```Javascript
+let data =[
+ ...
+ ....
+ .....
+]
+const totalAge = data.reduce((total,item)=>{
+ return total + item.age
+},0)
+
+console.log(totalAge)
+```
+Ancak bu işlemi forEach ile yapıcak olursak nolurdu.
+
+```
+total = 0
+data.forEach( item => total += item.age )
+
+console.log(total)
+```
+
+bir değişken tanımlamamız gerekir işte reduce bizi bazı yüklerden kurtarır.

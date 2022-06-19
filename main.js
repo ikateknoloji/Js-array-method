@@ -1156,3 +1156,15 @@ data.forEach( item => total += item.age )
 console.log(total)
 
 
+let group = "gender"
+
+let employeeList = data.reduce((acc,employee)=>{
+  let key = employee[group]
+  if(!acc[key]){
+    acc[key] = []
+    }
+  acc[key].push(employee)
+   return acc
+},{})
+
+console.log(employeeList)
