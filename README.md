@@ -199,3 +199,4 @@ filter(function(element, index, array) { /* ... */ }, thisArg)
  
  console.log(filteredItems)
  ```
+ **Başlangıç değeri olarak bir obje yada array olarak başlatılabilir. Yukarda gördüğünüz örnekte aynı cinse ait kişiler gruplandırılmıştır.Böylece hepsini isteğimiz başlıklar altında toplayabiliriz.**
