@@ -227,3 +227,20 @@ console.log(total)
 ```
 
 bir değişken tanımlamamız gerekir işte reduce bizi bazı yüklerden kurtarır.
+
+```Javascript
+
+let group = "gender"
+
+let employeeList = data.reduce((acc,employee)=>{
+  let key = employee[group]
+  if(!acc[key]){
+    acc[key] = []
+    }
+  acc[key].push(employee)
+   return acc
+},{})
+
+console.log(employeeList)
+
+```
